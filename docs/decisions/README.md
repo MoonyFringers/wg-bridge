@@ -6,7 +6,7 @@ This directory contains decision records for **wg-bridge**.
 
 - Copy `adr-template.md` to `NNNN-title-with-dashes.md`
 - Edit `NNNN-title-with-dashes.md`
-- Open pull requests to `LunaticFringers/wg-bridge`
+- Open pull requests to `MoonyFringerss/wg-bridge`
 
 ## Resources
 

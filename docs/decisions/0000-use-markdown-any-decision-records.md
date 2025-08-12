@@ -17,11 +17,11 @@ Where should the records live?
 
 ### Location
 
-- <https://github.com/LunaticFringers/wg-bridge>
+- <https://github.com/MoonyFringerss/wg-bridge>
 
 ## Decision Outcome
 
-MADR in LunaticFringers/wg-bridge, because
+MADR in MoonyFringerss/wg-bridge, because
 
 - Motivations, architecture, design and code decisions should be open and public.
 - Github merge request workflow adds an easy review workflow we

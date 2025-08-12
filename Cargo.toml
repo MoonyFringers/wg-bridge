@@ -2,11 +2,11 @@
 name = "wgb"
 version = "0.1.0"
 edition = "2024"
-authors = ["LunaticFringers"]
+authors = ["MoonyFringerss"]
 description = "Simplified Wireguard VPN handler for Debian & derivates"
 license = "AGPL-3.0-or-later"
 license-file = "LICENSE"
-repository = "https://github.com/LunaticFringers/wg-bridge"
+repository = "https://github.com/MoonyFringerss/wg-bridge"
 categories = ["networking"]
 
 [dependencies]
