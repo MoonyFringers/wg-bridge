@@ -1,0 +1,75 @@
+name: Release wgb
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of the release'
+        required: false
+        default: 'v0.0.0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Run Build Script
+        run: |
+          source .venv/bin/activate
+          python3 src/build.py
+
+      - name: Set Version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            VERSION="${{ github.ref_name }}"
+          else
+            VERSION="${{ github.event.inputs.version }}"
+          fi
+          VERSION="${VERSION#v}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Create tar.gz archive
+        run: |
+          tar -czvf wgb-${{ env.VERSION }}.tar.gz -C dist .
+
+      - name: Upload Artifact (Versioned)
+        uses: actions/upload-artifact@v4
+        with:
+          name: wgb-${{ env.VERSION }}
+          path: wgb-${{ env.VERSION }}.tar.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          body: |
+            Automatically generated release for v${{ env.VERSION }}.
+          draft: true
+          prerelease: true
+          files: |
+            wgb-${{ env.VERSION }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
