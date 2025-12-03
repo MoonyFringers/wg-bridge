@@ -23,8 +23,8 @@ The application is currently in an early development stage and no specific desig
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/wg-manager
-cd wg-manager
+git clone https://github.com/<your-username>/wg-bridge
+cd wg-bridge
 ````
 
 ### 2. Create a virtual environment
